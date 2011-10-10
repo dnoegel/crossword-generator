@@ -1,5 +1,14 @@
 Crossword generator
 Generates crosswords and exports them to htlm, png or ascii
 
-# License
+## Thanks 
+to Bryan Helmig for his inspiration for this script. He did a lot of work which 
+I could improve in some ways.
+See http://bryanhelmig.com/python-crossword-puzzle-generator/ for his code.
+
+
+## License
 GPLv3
+
+## Speed up the script
+Use PyPy oder Psyco to speed up the script
