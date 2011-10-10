@@ -1,0 +1,92 @@
+CrossWord File specification
+
+cwf files are simple text files storing crosswords. Each cwf file 
+consists of two basic sections: "options" and "questions".
+You will be able to read cwf-files with almost any ini/config-parser.
+Note that cases will be ignored in sections and option names - the
+following example will work:
+
+[OPtioNS]
+SoLuTiOn = Free Willy
+
+Note however, that capitalizations in the title won't get lost. 
+
+The Option-Section
+==================
+The option-section defines basic settings of the crossword: its name,
+its solution and whether the questions are stored as "question=answer" 
+or as "answer=question".
+
+So the main options are:
+
+question first = [True/False] (Default: True)
+title = STRING
+solution = STRING
+
+The crossword's solution
+------------------------
+Crossword usually are solved, when every single field was filled out
+correctly. Additionaly some crosswords have special fields which letters
+form another word or sentence. 
+If not solution is specified in the option-section, you will have a
+normal crossword without any special fields.
+If you specify an solution (e.g. "Hi there"), there will be 7 special fields:
+two fields in color #1 (for "h" and "i") and 5 fields in color #2 (for
+"t", "h", "e", "r" and "e"). If one solved the crossword, he will now have
+two  put the letters in the right order into some additional boxes at
+the bottom of the crossword. 
+So basically setting the solution-option will generate a crossword with
+an additional anagram. 
+
+The Questions-Section
+=====================
+In the questions-section each line represents a question/answer pair. 
+Depending on "solution first" being False or True this also might be
+an answer/question pair. 
+
+String types and matches
+========================
+Sections need to match the following RegExp:  "\s*\[\w.*\]"
+Case will be ignored as well as leading and trailing whitespace chars.
+
+Options and Q/A-pairs need to match this RegExp:
+"\s*(?P<key>.+?)[ \t]*?[:=][ \t]*(?P<value>.+)"
+
+Any lines not matching these strings will be ignored. Its recommended
+to use number signs for comments anyway. 
+
+Umlaute (ä,ö,ü) and other special chars (ß,é) will work as a part of the
+question - but they will most probably fail as part of the answer.
+In future versions of the cwf-reader using chars not matching [a-zA-Z]
+in answers will most probably throw an exception. So please try to
+limit yourself to those letters.
+
+Example file
+============
+[options]
+question first = False
+solution = Weimar ist schoen
+
+[questions]
+Thueringen = In welchem Bundesland liegt Weimar?
+Ettersberg = Auf welchem Berg liegt die Gedenkstätte Buchenwald?
+Ilm = Welcher Fluß durchläuft Weimar?
+Becken = Im Westen der Stadt findet sich das Thüringer... .
+Wimares = Wie wurde Weimar im Mittelalter genannt?
+Grafschaft = Von 946 bis 1346 war Weimar eine... .
+Brand = Nach welchem Ereignis wurde Weimar 1424 mit einer großen Mauer umgeben?
+Gold = Nach welchem Edelmetall wurde die Epoche um die Weimarer Klassik benannt?
+Wieland = Wer gehört noch zum "Viergestirn" der Weimarer Klassik: Goethe, Schiller, Herder und .... ?
+Herzogin = Welches Amt hatte die Namensgeberin der Anna-Amalia-Bibliothek inne?
+Wagner = Welcher bekannte Komponist hielt sich in Weimar auf?
+Lesegesellschaften = Wodurch wollte man nach 1850 auch "einfachen" Menschen Kunst und Kultur nahe bringen?
+Bauhaus = Welche Weimarer Institution revolutionierte Architektur und Design in Deutschland und der Welt nachhaltig?
+Jena = Von Erfurt und ... liegt Weimar jeweils ca. 20 Kilometer entfernt.
+Dessau = Wohin zog das Bauhaus 1925?
+Hitlerjugend = Welche NSDAP-Organisation wurde in Weimar gegründet?
+Speziallager = Was wurde aus dem KZ Buchenwald in der SBZ?
+Kulturstadt = 1999 wurde Weimar zur "... Europas" erklärt.
+Weltkulturerbe = Gleich mehrere Gebäude in Weimar gehören zum UNESCO-... .
+
+
+
