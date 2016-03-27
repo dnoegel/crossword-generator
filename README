@@ -12,3 +12,5 @@ GPLv3
 
 ## Speed up the script
 Use PyPy oder Psyco to speed up the script
+
+## To get the output font working on Ubuntu: (1) use apt-get to install package `ttf-mscorefonts-installer` (2) edit `crossword.py` to have the correct path to `arial.ttf`.`
